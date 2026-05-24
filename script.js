@@ -70,24 +70,9 @@ function setupEventListeners() {
   document
     .getElementById("columnToggleBtn")
     .addEventListener("click", toggleColumnDropdown);
-//   document
-//     .getElementById("addColumnSelectAll")
-//     .addEventListener("click", selectAllColumns);
-//   document
-//     .getElementById("addColumnDeselectAll")
-//     .addEventListener("click", deselectAllColumns);
-  document
-    .getElementById("addBtn")
-    .addEventListener("click", () => openModal());
   document
     .getElementById("printBtn")
     .addEventListener("click", () => window.print());
-//   document.getElementById("modalClose").addEventListener("click", closeModal);
-  document.getElementById("modalCancel").addEventListener("click", closeModal);
-  document.getElementById("modalSave").addEventListener("click", saveEntry);
-  document.getElementById("modalOverlay").addEventListener("click", (e) => {
-    if (e.target === e.currentTarget) closeModal();
-  });
   document.addEventListener("click", (e) => {
     const dropdown = document.getElementById("columnDropdown");
     const btn = document.getElementById("columnToggleBtn");
@@ -184,10 +169,7 @@ function renderTable() {
       }
     });
     const realIdx = nutritionData.indexOf(row);
-    // html += `<td class="actions-cell no-print">
-    //   <button class="btn-icon" onclick="openModal(${realIdx})" title="Modifier">✏️</button>
-    //   <button class="btn-icon" onclick="deleteEntry(${realIdx})" title="Supprimer">🗑️</button>
-    // </td></tr>`;
+
   });
 
   html += "</tbody></table>";
