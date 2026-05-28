@@ -38,14 +38,27 @@ const allColumns = [
   { key: "Foie", label: "Foie (/10)", type: "score" },
   { key: "Cœur", label: "Cœur (/10)", type: "score" },
   { key: "Intestins", label: "Intestins (/10)", type: "score" },
+  { key: "Anti-inflammatoire", label: "Anti-inflammatoire (/10)", type: "score" },
+  { key: "Anti-hépatite B", label: "Anti-hépatite B (/10)", type: "score" },
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
-  visibleColumns = allColumns.map((c) =>  {
-    if(["Aliments", "Foie", "Cœur", "Intestins"].includes( c.key)){
-        return c.key
-    }
-  });
+  visibleColumns = allColumns
+    .map((c) => {
+      if (
+        [
+          "Aliments",
+          "Foie",
+          "Cœur",
+          "Intestins",
+          "Anti-inflammatoire",
+          "Anti-hépatite B",
+        ].includes(c.key)
+      ) {
+        return c.key;
+      }
+    })
+    .filter(Boolean);
   await loadData();
   renderTable();
   setupEventListeners();
