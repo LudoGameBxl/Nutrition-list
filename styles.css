@@ -219,68 +219,65 @@ body {
 /* Table */
 .table-container {
   padding: 0 24px 24px;
-  overflow-x: auto;
+  width: 100%;
 }
 
+/* On définit dynamiquement le nombre de colonnes via une variable CSS --cols
+   à injecter en JS quand l'utilisateur change la sélection de colonnes */
 table {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 6), minmax(0, 1fr));
   width: 100%;
-  border-collapse: collapse;
   background: var(--surface);
   border-radius: 12px;
-  overflow: hidden;
   box-shadow: var(--shadow);
   margin-top: 16px;
 }
 
-thead {
-  background: var(--primary-light);
-  position: sticky;
-  /* top: 60px; */
-  z-index: 10;
+thead,
+tbody,
+tr {
+  display: contents; /* les enfants deviennent items de la grid */
+}
+
+thead th,
+tbody td {
+  padding: 10px 14px;
+  font-size: 16px;
+  border-bottom: 1px solid var(--border);
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  display: flex;
+  align-items: center;
 }
 
 thead th {
-  padding: 12px 14px;
-  text-align: left;
-  font-size: 18px;
+  background: var(--primary-light);
   font-weight: 600;
   color: var(--primary-dark);
   text-transform: uppercase;
   letter-spacing: 0.3px;
   border-bottom: 2px solid var(--primary);
-  white-space: nowrap;
   cursor: pointer;
   user-select: none;
-  transition: background 0.15s;
+  font-size: 14px; /* j'ai réduit, 18px était énorme */
 }
 
-thead th:hover {
-  background: #d2e3fc;
-}
+thead th:first-child { border-top-left-radius: 12px; }
+thead th:last-child  { border-top-right-radius: 12px; }
 
-thead th .sort-icon {
-  margin-left: 4px;
-  opacity: 0.4;
-}
-
-thead th.sorted .sort-icon {
-  opacity: 1;
-}
-
-tbody tr {
-  border-bottom: 1px solid var(--border);
-  transition: background 0.15s;
-}
-
-tbody tr:hover {
+/* Effet hover sur la "ligne" : on cible les td qui partagent le même parent logique.
+   Comme display:contents casse le hover sur <tr>, on utilise :has() */
+tr:hover td {
   background: var(--hover);
 }
+
 
 tbody td {
   padding: 10px 14px;
   font-size: 16px;
   color: var(--text);
-  white-space: nowrap;
 }
 
 tbody td.aliment-name {
