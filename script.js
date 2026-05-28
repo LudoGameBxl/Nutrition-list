@@ -7,6 +7,9 @@ let editingIndex = -1;
 
 const allColumns = [
   { key: "Aliments", label: "Aliments", type: "text" },
+  { key: "Fréquence", label: "Fréquence", type: "text"},
+  { key: "Portion idéale", label: "Portion idéale", type: "text"},
+  { key: "Portion acceptable", label: "Portion acceptable", type: "text"},
   { key: "Fer (mg)", label: "Fer (mg)", type: "number" },
   { key: "Vit. A (µg RAE)", label: "Vit. A (µg RAE)", type: "number" },
   { key: "Vit. B9 (µg)", label: "Vit. B9 (µg)", type: "number" },
@@ -40,6 +43,10 @@ const allColumns = [
   { key: "Intestins", label: "Intestins (/10)", type: "score" },
   { key: "Anti-inflammatoire", label: "Anti-inflammatoire (/10)", type: "score" },
   { key: "Anti-hépatite B", label: "Anti-hépatite B (/10)", type: "score" },
+  { key: "Score global", label: "Score global (/10)", type: "number"},
+
+  { key: "Mode de cuisson privilégié", label: "Mode de cuisson privilégié", type: "text"},
+  { key: "Notes spécifiques", label:  "Notes spécifiques", type: "text"},
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -48,11 +55,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (
         [
           "Aliments",
+          "Fréquence",
+          "Portion idéale",
           "Foie",
           "Cœur",
           "Intestins",
           "Anti-inflammatoire",
           "Anti-hépatite B",
+          // "Score global"
         ].includes(c.key)
       ) {
         return c.key;
@@ -189,6 +199,7 @@ function renderTable() {
   container.innerHTML = html;
   document.getElementById("rowCount").textContent =
     `${filteredData.length} aliment${filteredData.length > 1 ? "s" : ""} affiché${filteredData.length > 1 ? "s" : ""} sur ${nutritionData.length}`;
+  updateGridColumns()
 }
 
 function sortBy(key) {
@@ -219,71 +230,7 @@ function applySorting() {
   });
 }
 
-function openModal(index = -1) {
-  editingIndex = index;
-  const modal = document.getElementById("modalOverlay");
-  const title = document.getElementById("modalTitle");
-  const form = document.getElementById("modalForm");
-
-  title.textContent = index >= 0 ? "Modifier l'aliment" : "Ajouter un aliment";
-
-  let formHTML = '<div class="form-grid">';
-  allColumns.forEach((col) => {
-    const val = index >= 0 ? (nutritionData[index][col.key] ?? "") : "";
-    const isFullWidth = col.type === "text" && col.key !== "Aliments";
-    formHTML += `<div class="form-group ${isFullWidth ? "full-width" : ""}">
-      <label>${col.label}</label>
-      <input type="${col.type === "score" ? "number" : col.type === "number" ? "text" : "text"}" 
-             data-key="${col.key}" 
-             value="${String(val).replace(/"/g, "&quot;")}" 
-             ${col.type === "score" ? 'min="0" max="10"' : ""}
-             placeholder="${col.label}">
-    </div>`;
-  });
-  formHTML += "</div>";
-  form.innerHTML = formHTML;
-
-  modal.classList.add("open");
-}
-
-function closeModal() {
-  document.getElementById("modalOverlay").classList.remove("open");
-  editingIndex = -1;
-}
-
-function saveEntry() {
-  const inputs = document.querySelectorAll("#modalForm input");
-  const entry = {};
-  inputs.forEach((input) => {
-    const key = input.dataset.key;
-    const col = allColumns.find((c) => c.key === key);
-    let val = input.value.trim();
-    if (col.type === "number" || col.type === "score") {
-      entry[key] = val === "" ? "" : val;
-    } else {
-      entry[key] = val;
-    }
-  });
-
-  if (!entry["Aliments"]) {
-    alert("Le nom de l'aliment est obligatoire.");
-    return;
-  }
-
-  if (editingIndex >= 0) {
-    nutritionData[editingIndex] = entry;
-  } else {
-    nutritionData.push(entry);
-  }
-
-  handleSearch({ target: document.getElementById("searchInput") });
-  closeModal();
-}
-
-function deleteEntry(index) {
-  const name = nutritionData[index]["Aliments"];
-  if (confirm(`Supprimer "${name}" ?`)) {
-    nutritionData.splice(index, 1);
-    handleSearch({ target: document.getElementById("searchInput") });
-  }
+function updateGridColumns() {
+  const visibleCols = document.querySelectorAll('thead th:not(.hidden)').length;
+  document.querySelector('table').style.setProperty('--cols', visibleCols);
 }
