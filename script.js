@@ -47,7 +47,7 @@ const allColumns = [
     type: "score",
   },
   { key: "Anti-hépatite B", label: "Anti-hépatite B (/10)", type: "score" },
-  { key: "Score global", label: "Score global (/10)", type: "number" },
+  { key: "Score global", label: "Score global (/10)", type: "score" },
 
   {
     key: "Mode de cuisson privilégié",
@@ -191,7 +191,7 @@ function renderTable() {
   cols.forEach((col) => {
     const sorted = sortColumn === col.key;
     const icon = sorted ? (sortDirection === "asc" ? "↑" : "↓") : "↕";
-    html += `<th class="${sorted ? "sorted" : ""}" onclick="sortBy('${col.key}')">${col.label} <span class="sort-icon">${icon}</span></th>`;
+    html += `<th class="${sorted ? "sorted" : ""}" onclick="sortBy('${col.key}')">${col.label} <span class="sort-icon ${sortDirection}">${icon}</span></th>`;
   });
   html += "</tr></thead><tbody>";
 

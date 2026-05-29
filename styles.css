@@ -406,6 +406,23 @@ tbody td.actions-cell {
   margin-top: 8px;
 }
 
+.sort-icon{
+  font-size: 28px;
+}
+
+.sorted{
+  background: #c1d7ff;
+}
+
+.sorted .sort-icon.desc{
+  color: #1e8e3e;
+}
+
+.sorted .sort-icon.asc{
+  color: #d93025;
+  font-weight: bold;
+}
+
 /* Print */
 @media print {
   .app-header,
