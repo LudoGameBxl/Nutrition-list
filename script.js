@@ -7,9 +7,9 @@ let editingIndex = -1;
 
 const allColumns = [
   { key: "Aliments", label: "Aliments", type: "text" },
-  { key: "Fréquence", label: "Fréquence", type: "text"},
-  { key: "Portion idéale", label: "Portion idéale", type: "text"},
-  { key: "Portion acceptable", label: "Portion acceptable", type: "text"},
+  { key: "Fréquence", label: "Fréquence", type: "text" },
+  { key: "Portion idéale", label: "Portion idéale", type: "text" },
+  { key: "Portion acceptable", label: "Portion acceptable", type: "text" },
   { key: "Fer (mg)", label: "Fer (mg)", type: "number" },
   { key: "Vit. A (µg RAE)", label: "Vit. A (µg RAE)", type: "number" },
   { key: "Vit. B9 (µg)", label: "Vit. B9 (µg)", type: "number" },
@@ -41,12 +41,26 @@ const allColumns = [
   { key: "Foie", label: "Foie (/10)", type: "score" },
   { key: "Cœur", label: "Cœur (/10)", type: "score" },
   { key: "Intestins", label: "Intestins (/10)", type: "score" },
-  { key: "Anti-inflammatoire", label: "Anti-inflammatoire (/10)", type: "score" },
+  {
+    key: "Anti-inflammatoire",
+    label: "Anti-inflammatoire (/10)",
+    type: "score",
+  },
   { key: "Anti-hépatite B", label: "Anti-hépatite B (/10)", type: "score" },
-  { key: "Score global", label: "Score global (/10)", type: "number"},
+  { key: "Score global", label: "Score global (/10)", type: "number" },
 
-  { key: "Mode de cuisson privilégié", label: "Mode de cuisson privilégié", type: "text"},
-  { key: "Notes spécifiques", label:  "Notes spécifiques", type: "text"},
+  {
+    key: "Mode de cuisson privilégié",
+    label: "Mode de cuisson privilégié",
+    type: "text",
+  },
+  { key: "Notes spécifiques", label: "Notes spécifiques", type: "text" },
+
+  { key: "J-1", label: "J-1 (veille)", type: "score" },
+  { key: "J0", label: "J 0", type: "score" },
+  { key: "J+1", label: "J+1", type: "score" },
+  { key: "J+3", label: "J+3", type: "score" },
+  { key: "J+7", label: "J+7", type: "score" },
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -62,6 +76,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           "Intestins",
           "Anti-inflammatoire",
           "Anti-hépatite B",
+          "J-1",
+          "J0",
+          "J+1",
+          "J+3",
+          "J+7",
           // "Score global"
         ].includes(c.key)
       ) {
@@ -174,7 +193,7 @@ function renderTable() {
     const icon = sorted ? (sortDirection === "asc" ? "↑" : "↓") : "↕";
     html += `<th class="${sorted ? "sorted" : ""}" onclick="sortBy('${col.key}')">${col.label} <span class="sort-icon">${icon}</span></th>`;
   });
-  html += '</tr></thead><tbody>';
+  html += "</tr></thead><tbody>";
 
   filteredData.forEach((row, idx) => {
     html += "<tr>";
@@ -192,14 +211,13 @@ function renderTable() {
       }
     });
     const realIdx = nutritionData.indexOf(row);
-
   });
 
   html += "</tbody></table>";
   container.innerHTML = html;
   document.getElementById("rowCount").textContent =
     `${filteredData.length} aliment${filteredData.length > 1 ? "s" : ""} affiché${filteredData.length > 1 ? "s" : ""} sur ${nutritionData.length}`;
-  updateGridColumns()
+  updateGridColumns();
 }
 
 function sortBy(key) {
@@ -231,6 +249,6 @@ function applySorting() {
 }
 
 function updateGridColumns() {
-  const visibleCols = document.querySelectorAll('thead th:not(.hidden)').length;
-  document.querySelector('table').style.setProperty('--cols', visibleCols);
+  const visibleCols = document.querySelectorAll("thead th:not(.hidden)").length;
+  document.querySelector("table").style.setProperty("--cols", visibleCols);
 }
