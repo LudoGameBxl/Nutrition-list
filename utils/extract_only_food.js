@@ -1,14 +1,14 @@
 const fs = require('fs');
 
-const dataFile = JSON.parse(fs.readFileSync('data.json', 'utf8'));
+const dataFile = JSON.parse(fs.readFileSync('../data.json', 'utf8'));
 
 
 const KEY = 'Aliments';
 
-console.log(Object.keys(dataFile[0]));
+// console.log(Object.keys(dataFile[0]));
 
 const foods = dataFile.map(item => item[KEY]);
-// console.log(foods)
+console.log(foods)
 
 
 // const ids2 = new Set(aliments2.map(item => itdem[KEY]));
