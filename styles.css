@@ -250,6 +250,7 @@ tbody td {
   word-break: break-word;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 thead th {
@@ -284,6 +285,7 @@ tbody td.aliment-name {
   font-weight: 500;
   white-space: normal;
   min-width: 160px;
+  justify-content: flex-start;
 }
 
 tbody td.actions-cell {
@@ -444,7 +446,7 @@ tbody td.actions-cell {
   }
   tbody td,
   thead th {
-    padding: 4px 6px;
+    padding: 1px 6px;
   }
 }
 

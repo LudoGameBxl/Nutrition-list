@@ -69,18 +69,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (
         [
           "Aliments",
-          "Fréquence",
-          "Portion idéale",
+          // "Fréquence",
+          // "Portion idéale",
+          "Oméga-3 (g)",
+          "Fer (mg)",
+          "Protéines (g)",
           "Foie",
           "Cœur",
           "Intestins",
           "Anti-inflammatoire",
           "Anti-hépatite B",
-          "J-1",
-          "J0",
-          "J+1",
-          "J+3",
-          "J+7",
+          // "J-1",
+          // "J0",
+          // "J+1",
+          // "J+3",
+          // "J+7",
           // "Score global"
         ].includes(c.key)
       ) {
