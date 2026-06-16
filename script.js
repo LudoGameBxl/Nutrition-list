@@ -56,11 +56,11 @@ const allColumns = [
   },
   { key: "Notes spécifiques", label: "Notes spécifiques", type: "text" },
 
-  { key: "J-1", label: "J-1 (veille)", type: "score" },
-  { key: "J0", label: "J 0", type: "score" },
-  { key: "J+1", label: "J+1", type: "score" },
-  { key: "J+3", label: "J+3", type: "score" },
-  { key: "J+7", label: "J+7", type: "score" },
+  // { key: "J-1", label: "J-1 (veille)", type: "score" },
+  // { key: "J0", label: "J 0", type: "score" },
+  // { key: "J+1", label: "J+1", type: "score" },
+  // { key: "J+3", label: "J+3", type: "score" },
+  // { key: "J+7", label: "J+7", type: "score" },
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
