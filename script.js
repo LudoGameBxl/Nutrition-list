@@ -3,8 +3,6 @@ let filteredData = [];
 let visibleColumns = [];
 let sortColumn = null;
 let sortDirection = "asc";
-let editingId = null; // id SQLite de l'aliment en cours d'édition (null = ajout)
-let editMode = false; // affiche/masque les outils d'édition
 let db = null; // base SQLite chargée en mémoire (sql.js)
 
 const allColumns = [
@@ -144,13 +142,6 @@ function setupEventListeners() {
   document
     .getElementById("printBtn")
     .addEventListener("click", () => window.print());
-  document
-    .getElementById("editModeBtn")
-    .addEventListener("click", toggleEditMode);
-  document
-    .getElementById("addBtn")
-    .addEventListener("click", () => openEditModal(null));
-  document.getElementById("exportBtn").addEventListener("click", exportDb);
   document.addEventListener("click", (e) => {
     const dropdown = document.getElementById("columnDropdown");
     const btn = document.getElementById("columnToggleBtn");
@@ -229,7 +220,6 @@ function renderTable() {
     const icon = sorted ? (sortDirection === "asc" ? "↑" : "↓") : "↕";
     html += `<th class="${sorted ? "sorted" : ""}" onclick="sortBy('${col.key}')">${col.label} <span class="sort-icon ${sortDirection}">${icon}</span></th>`;
   });
-  if (editMode) html += `<th class="actions-cell">Actions</th>`;
   html += "</tr></thead><tbody>";
 
   filteredData.forEach((row) => {
@@ -247,9 +237,6 @@ function renderTable() {
         html += `<td>${val}</td>`;
       }
     });
-    if (editMode) {
-      html += `<td class="actions-cell"><button class="btn-icon" title="Modifier" onclick="openEditModal(${row.id})">✏️</button><button class="btn-icon" title="Supprimer" onclick="deleteFood(${row.id})">🗑️</button></td>`;
-    }
     html += "</tr>";
   });
 
@@ -291,114 +278,4 @@ function applySorting() {
 function updateGridColumns() {
   const visibleCols = document.querySelectorAll("thead th:not(.hidden)").length;
   document.querySelector("table").style.setProperty("--cols", visibleCols);
-}
-
-/* ============================
-   ÉDITION (ajout / modif / suppression)
-   ============================ */
-
-function escapeAttr(val) {
-  return String(val).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
-}
-
-function toggleEditMode() {
-  editMode = !editMode;
-  document.body.classList.toggle("edit-mode", editMode);
-  document.getElementById("editModeBtn").classList.toggle("btn-primary", editMode);
-  renderTable();
-}
-
-function openEditModal(id) {
-  editingId = id;
-  const row =
-    id == null ? {} : nutritionData.find((r) => r.id === id) || {};
-
-  document.getElementById("modalTitle").textContent =
-    id == null ? "Ajouter un aliment" : "Modifier l'aliment";
-
-  let formHTML = "";
-  allColumns.forEach((col) => {
-    const val = row[col.key] ?? "";
-    const isText = col.type === "text";
-    const fullWidth =
-      isText && (col.key === "Notes spécifiques" || col.key === "Aliments");
-    const inputType = isText ? "text" : "number";
-    const step = col.type === "score" ? "1" : "any";
-    formHTML += `
-      <div class="form-group${fullWidth ? " full-width" : ""}">
-        <label>${col.label}</label>
-        <input type="${inputType}" data-key="${escapeAttr(col.key)}"
-               ${isText ? "" : `step="${step}"`} value="${escapeAttr(val)}">
-      </div>`;
-  });
-  document.getElementById("editForm").innerHTML = formHTML;
-  document.getElementById("editModal").classList.add("open");
-}
-
-function closeEditModal() {
-  document.getElementById("editModal").classList.remove("open");
-  editingId = null;
-}
-
-function saveFood() {
-  const inputs = document.querySelectorAll("#editForm input[data-key]");
-  const data = {};
-  inputs.forEach((input) => {
-    const key = input.dataset.key;
-    const col = allColumns.find((c) => c.key === key);
-    let value = input.value.trim();
-    if (value === "") {
-      data[key] = null;
-    } else if (col.type === "text") {
-      data[key] = value;
-    } else {
-      const num = Number(value);
-      data[key] = isNaN(num) ? value : num;
-    }
-  });
-
-  if (!data["Aliments"]) {
-    alert("Le nom de l'aliment est obligatoire.");
-    return;
-  }
-
-  const keys = Object.keys(data);
-  if (editingId == null) {
-    const cols = keys.map((k) => `"${k.replace(/"/g, '""')}"`).join(", ");
-    const ph = keys.map(() => "?").join(", ");
-    db.run(`INSERT INTO foods (${cols}) VALUES (${ph})`, keys.map((k) => data[k]));
-  } else {
-    const setClause = keys
-      .map((k) => `"${k.replace(/"/g, '""')}" = ?`)
-      .join(", ");
-    db.run(`UPDATE foods SET ${setClause} WHERE id = ?`, [
-      ...keys.map((k) => data[k]),
-      editingId,
-    ]);
-  }
-
-  reloadFromDb();
-  renderTable();
-  closeEditModal();
-}
-
-function deleteFood(id) {
-  const row = nutritionData.find((r) => r.id === id);
-  const name = row ? row.Aliments : "cet aliment";
-  if (!confirm(`Supprimer « ${name} » ?`)) return;
-  db.run("DELETE FROM foods WHERE id = ?", [id]);
-  reloadFromDb();
-  renderTable();
-}
-
-// Exporte la base modifiée : à recommiter sur GitHub pour publier les changements.
-function exportDb() {
-  const data = db.export();
-  const blob = new Blob([data], { type: "application/octet-stream" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "nutrition.db";
-  a.click();
-  URL.revokeObjectURL(url);
 }

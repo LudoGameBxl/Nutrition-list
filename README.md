@@ -24,23 +24,16 @@ Aucun serveur, aucune dépendance réseau externe : `sql.js` est vendorisé dans
 
 ## Modifier les données
 
-L'édition se fait **dans le navigateur** (les visiteurs, eux, restent en lecture
-seule) :
-
-1. Ouvrir le site et cliquer sur **✏️ Éditer** pour activer le mode édition.
-2. **➕ Ajouter** un aliment, ou ✏️ / 🗑️ sur une ligne pour modifier / supprimer.
-3. Cliquer sur **💾 Exporter la base** : un nouveau `nutrition.db` est téléchargé.
-4. Remplacer `nutrition.db` à la racine du dépôt par le fichier téléchargé, puis
-   **commiter et pousser** pour publier les changements.
-
-## Regénérer la base depuis les JSON
-
-Si vous préférez éditer les fichiers JSON à la main :
+Le site est en **lecture seule**. Les données se gèrent en éditant les fichiers
+**JSON** (`data.json` et les fichiers par catégorie), puis en regénérant la base :
 
 ```bash
 npm install        # installe sql.js (dépendance de dev uniquement)
 npm run build:db   # regénère nutrition.db + data_all.json depuis les data*.json
 ```
+
+Ensuite, **commiter et pousser** `nutrition.db` (et les JSON modifiés) pour
+publier les changements.
 
 Le script consolide `data.json` (sur-ensemble enrichi) et les fichiers par
 catégorie (`data_drink.json`, `data_fruits.json`, …) en une seule table `foods`,
