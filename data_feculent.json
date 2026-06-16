@@ -34,7 +34,8 @@
     "J0": 10,
     "J+1": 10,
     "J+3": 8,
-    "J+7": 8
+    "J+7": 8,
+    "IG": 70
   },
   {
     "Aliments": "Riz complet",
@@ -71,7 +72,8 @@
     "J0": 6,
     "J+1": 7,
     "J+3": 9,
-    "J+7": 9
+    "J+7": 9,
+    "IG": 50
   },
   {
     "Aliments": "Pâtes blanches",
@@ -108,7 +110,8 @@
     "J0": 9,
     "J+1": 9,
     "J+3": 8,
-    "J+7": 8
+    "J+7": 8,
+    "IG": 50
   },
   {
     "Aliments": "Pâtes complètes",
@@ -145,7 +148,8 @@
     "J0": 6,
     "J+1": 7,
     "J+3": 9,
-    "J+7": 9
+    "J+7": 9,
+    "IG": 40
   },
   {
     "Aliments": "Pomme de terre (vapeur, épluchée)",
@@ -182,7 +186,8 @@
     "J0": 9,
     "J+1": 10,
     "J+3": 9,
-    "J+7": 9
+    "J+7": 9,
+    "IG": 70
   },
   {
     "Aliments": "Pomme de terre (eau, épluchée)",
@@ -219,7 +224,8 @@
     "J0": 10,
     "J+1": 10,
     "J+3": 8,
-    "J+7": 8
+    "J+7": 8,
+    "IG": 70
   },
   {
     "Aliments": "Pomme de terre (four, épluchée)",
@@ -256,7 +262,8 @@
     "J0": 7,
     "J+1": 8,
     "J+3": 8,
-    "J+7": 8
+    "J+7": 8,
+    "IG": 78
   },
   {
     "Aliments": "Pomme de terre avec peau (vapeur)",
@@ -293,7 +300,8 @@
     "J0": 8,
     "J+1": 9,
     "J+3": 10,
-    "J+7": 10
+    "J+7": 10,
+    "IG": 70
   },
   {
     "Aliments": "Pomme de terre avec peau (eau)",
@@ -330,7 +338,8 @@
     "J0": 8,
     "J+1": 9,
     "J+3": 9,
-    "J+7": 9
+    "J+7": 9,
+    "IG": 70
   },
   {
     "Aliments": "Pomme de terre avec peau (four)",
@@ -367,7 +376,8 @@
     "J0": 7,
     "J+1": 8,
     "J+3": 9,
-    "J+7": 9
+    "J+7": 9,
+    "IG": 78
   },
   {
     "Aliments": "Crêpes",
@@ -404,7 +414,8 @@
     "J0": 5,
     "J+1": 6,
     "J+3": 6,
-    "J+7": 6
+    "J+7": 6,
+    "IG": 65
   },
   {
     "Aliments": "Gaufres",
@@ -441,7 +452,8 @@
     "J0": 3,
     "J+1": 3,
     "J+3": 4,
-    "J+7": 4
+    "J+7": 4,
+    "IG": 75
   },
   {
     "Aliments": "Purée de pomme de terre (maison)",
@@ -478,7 +490,8 @@
     "J0": 10,
     "J+1": 10,
     "J+3": 9,
-    "J+7": 9
+    "J+7": 9,
+    "IG": 80
   },
   {
     "Aliments": "Frites maison (graisse de bœuf)",
@@ -515,7 +528,8 @@
     "J0": 1,
     "J+1": 2,
     "J+3": 4,
-    "J+7": 4
+    "J+7": 4,
+    "IG": 75
   },
   {
     "Aliments": "Frites maison (graisse de porc/saindoux)",
@@ -552,7 +566,8 @@
     "J0": 1,
     "J+1": 2,
     "J+3": 4,
-    "J+7": 4
+    "J+7": 4,
+    "IG": 75
   },
   {
     "Aliments": "Frites maison (huile végétale)",
@@ -589,6 +604,7 @@
     "J0": 1,
     "J+1": 2,
     "J+3": 3,
-    "J+7": 3
+    "J+7": 3,
+    "IG": 75
   }
 ]

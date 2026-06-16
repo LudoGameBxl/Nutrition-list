@@ -68,6 +68,7 @@ function collectColumns(records) {
   };
   push("Aliments");
   push("Catégorie");
+  push("IG"); // garantit la présence de la colonne IG même si aucun record ne la renseigne
   for (const rec of records) Object.keys(rec).forEach(push);
   return cols;
 }

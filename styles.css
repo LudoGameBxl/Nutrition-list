@@ -319,6 +319,180 @@ tbody td.actions-cell {
   color: #c5221f;
 }
 
+/* ============================
+   CALCULATEUR REPAS (charge glycémique)
+   ============================ */
+
+/* Case à cocher + portion, intégrées à la cellule "Aliments" */
+.meal-ctl {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 8px;
+}
+.meal-ctl input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+.meal-ctl .portion-input {
+  width: 54px;
+  padding: 2px 4px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  text-align: right;
+}
+
+.meal-card {
+  margin: 12px 24px 0;
+}
+.meal-card.active {
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--primary);
+  padding: 16px 20px;
+}
+.meal-empty {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-style: italic;
+  padding: 4px 24px;
+}
+.meal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.meal-head h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+/* La table récap repose en mode "table" classique (la règle globale table=grid ne s'applique pas) */
+.meal-table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  box-shadow: none;
+  border-radius: 0;
+  margin: 0;
+}
+.meal-table thead,
+.meal-table tbody {
+  display: table-row-group;
+}
+.meal-table tr {
+  display: table-row;
+}
+.meal-table th,
+.meal-table td {
+  display: table-cell;
+  padding: 6px 10px;
+  text-align: right;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.meal-table th {
+  background: transparent;
+  color: var(--text-secondary);
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: default;
+  border-bottom: 1px solid var(--border);
+}
+.meal-table th:first-child,
+.meal-table td.m-name {
+  text-align: left;
+}
+.meal-table td.m-name {
+  font-weight: 500;
+  white-space: normal;
+}
+.m-warn {
+  color: var(--danger);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.cg-badge {
+  display: inline-block;
+  min-width: 34px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 13px;
+  text-align: center;
+}
+.cg-badge.cg-big {
+  font-size: 18px;
+  padding: 4px 14px;
+}
+.cg-low {
+  background: #e6f4ea;
+  color: #137333;
+}
+.cg-mid {
+  background: #fef7e0;
+  color: #b06000;
+}
+.cg-high {
+  background: #fce8e6;
+  color: #c5221f;
+}
+
+.meal-summary {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.meal-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+}
+.meal-line.meal-total {
+  font-weight: 600;
+  font-size: 15px;
+}
+.meal-mods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+.m-mod {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  border-radius: 10px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.m-mod.m-none {
+  background: var(--hover);
+  color: var(--text-secondary);
+}
+.cg-tag {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+
 /* Modal */
 .modal-overlay {
   display: none;
