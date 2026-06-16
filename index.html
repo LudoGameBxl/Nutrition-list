@@ -26,6 +26,9 @@
       </div>
 
       <button class="btn" id="printBtn">🖨️ Imprimer</button>
+      <button class="btn" id="editModeBtn">✏️ Éditer</button>
+      <button class="btn edit-only" id="addBtn">➕ Ajouter</button>
+      <button class="btn edit-only" id="exportBtn">💾 Exporter la base</button>
     </div>
 
     <p class="row-count" id="rowCount"></p>
@@ -71,6 +74,19 @@
 
     <div class="table-container" id="tableContainer"></div>
 
+    <!-- Modal d'ajout / modification d'un aliment -->
+    <div class="modal-overlay no-print" id="editModal">
+      <div class="modal">
+        <h2 id="modalTitle">Ajouter un aliment</h2>
+        <div class="form-grid" id="editForm"></div>
+        <div class="modal-actions">
+          <button class="btn" onclick="closeEditModal()">Annuler</button>
+          <button class="btn btn-primary" onclick="saveFood()">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+
+    <script defer src="vendor/sql-wasm.js"></script>
     <script defer src="script.js"></script>
   </body>
 </html>

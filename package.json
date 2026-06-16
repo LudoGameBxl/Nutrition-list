@@ -1,0 +1,12 @@
+{
+  "name": "nutrition-list",
+  "version": "1.0.0",
+  "description": "Table nutritionnelle des aliments — site statique avec base SQLite (sql.js).",
+  "private": true,
+  "scripts": {
+    "build:db": "node utils/build_db.js"
+  },
+  "devDependencies": {
+    "sql.js": "^1.12.0"
+  }
+}

@@ -146,6 +146,15 @@ body {
   background: var(--hover);
 }
 
+/* Outils d'édition : visibles seulement en mode édition */
+.edit-only {
+  display: none;
+}
+
+body.edit-mode .edit-only {
+  display: inline-flex;
+}
+
 /* Column Selector */
 .column-selector-wrapper {
   position: relative;
